@@ -1,5 +1,9 @@
 package techpark.model.usuarios;
 
+import techpark.estructuras.conjunto.SetArbol;
+import techpark.model.eventos.Notificacion;
+import techpark.model.parque.Atraccion;
+
 import java.util.ArrayList;
 import java.util.List;
 

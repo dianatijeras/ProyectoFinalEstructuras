@@ -1,6 +1,7 @@
 package techpark.servicios.alertas;
 
 import techpark.enums.*;
+import techpark.estructuras.conjunto.SetArbol;
 import techpark.model.eventos.AlertaClimatica;
 import techpark.model.eventos.AlertaMantenimiento;
 import techpark.model.eventos.Notificacion;
@@ -8,6 +9,7 @@ import techpark.model.parque.Atraccion;
 import techpark.model.parque.Parque;
 import techpark.model.tickets.EntradaEnCola;
 import techpark.model.usuarios.Visitante;
+import techpark.utilidades.GeneradorId;
 
 import java.util.ArrayList;
 import java.util.List;
