@@ -68,7 +68,8 @@ public class RegistroVisita {
     }
 
     /**
-     * Método toString para representar el registro de visita como una cadena de texto, mostrando la
+     * Método toString para representar el registro de visita como una cadena de texto.
+      * @return
      */
     public String toString() {
         return fechaHora + " - " + atraccion.getNombre() + " - " + tipoTicket;
