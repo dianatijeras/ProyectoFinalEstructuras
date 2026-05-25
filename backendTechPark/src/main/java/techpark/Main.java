@@ -1,5 +1,7 @@
 package techpark;
 
+import techpark.gui.LoginFrame;
+
 import javax.swing.*;
 
 public class Main {
