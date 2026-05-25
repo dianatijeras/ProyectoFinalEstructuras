@@ -12,7 +12,8 @@ public class AlertaMantenimiento implements Comparable<AlertaMantenimiento> {
     private boolean atendida;
 
     /**
-     * Constructor de la clase AlertaMantenimiento. Crea una nueva alerta de mantenimiento con el id y atracción especificados, y establece la fecha de generación como la fecha actual. La alerta se establece como no atendida por defecto.
+     * Constructor de la clase AlertaMantenimiento.
+     * La alerta se establece como no atendida por defecto.
      * @param id
      * @param atraccion
      */
@@ -21,7 +22,7 @@ public class AlertaMantenimiento implements Comparable<AlertaMantenimiento> {
     }
 
     /**
-     * Constructor de la clase AlertaMantenimiento. Crea una nueva alerta de mantenimiento con el id, atracción, fecha de generación y estado de atención especificados.
+     * Constructor de la clase AlertaMantenimiento.
      * @param id
      * @param atraccion
      * @param fechaGeneracion
@@ -35,7 +36,8 @@ public class AlertaMantenimiento implements Comparable<AlertaMantenimiento> {
     }
 
     /**
-     * Compara esta alerta de mantenimiento con otra basada en la fecha de generación. Devuelve un valor negativo si esta alerta es anterior a la otra, un valor positivo si es posterior, o cero si ambas alertas tienen la misma fecha de generación.
+     * Compara esta alerta de mantenimiento con otra basada en la fecha de generación.
+     * Devuelve un valor negativo si esta alerta es anterior a la otra, un valor positivo si es posterior, o cero si ambas alertas tienen la misma fecha de generación.
      * @param otra the object to be compared.
      * @return
      */

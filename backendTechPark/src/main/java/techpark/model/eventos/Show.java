@@ -3,7 +3,7 @@ package techpark.model.eventos;
 import java.time.LocalDateTime;
 
 /**
- * Clase que representa un show programado en el parque, con su nombre, zona, horario, duración y estado.
+ * Clase que representa un show programado en el parque.
  */
 public class Show {
     private String id;
@@ -14,7 +14,7 @@ public class Show {
     private EstadoShow estado = EstadoShow.PROGRAMADO;
 
     /**
-     * Constructor de la clase Show. Recibe un id, un nombre, una zona, un horario y una duración, y establece el estado del show como PROGRAMADO por defecto.
+     * Constructor de la clase Show, establece el estado del show como PROGRAMADO por defecto.
      * @param id
      * @param nombre
      * @param zona

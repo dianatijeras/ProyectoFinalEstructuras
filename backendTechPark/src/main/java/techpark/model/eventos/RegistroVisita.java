@@ -3,7 +3,7 @@ package techpark.model.eventos;
 import java.time.LocalDateTime;
 
 /**
- * Registro de una visita a una atracción, con detalles como la atracción visitada, la fecha y hora de la visita, el tipo de ticket utilizado y el costo deducido.
+ * Registro de una visita a una atracción.
  */
 public class RegistroVisita {
     private Atraccion atraccion;
@@ -12,7 +12,7 @@ public class RegistroVisita {
     private double costoDeducido;
 
     /**
-     * Constructor de la clase RegistroVisita. Recibe una atracción, un tipo de ticket y un costo deducido, y establece la fecha y hora de la visita como el momento actual.
+     * Constructor de la clase RegistroVisita.
      * @param atraccion
      * @param tipoTicket
      * @param costoDeducido
@@ -22,7 +22,7 @@ public class RegistroVisita {
     }
 
     /**
-     * Constructor de la clase RegistroVisita. Recibe una atracción, un tipo de ticket, un costo deducido y una fecha y hora específica para la visita.
+     * Constructor de la clase RegistroVisita.
      * @param atraccion
      * @param tipoTicket
      * @param costoDeducido

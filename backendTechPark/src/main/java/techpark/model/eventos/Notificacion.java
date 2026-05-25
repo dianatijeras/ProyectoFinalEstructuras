@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase que representa una notificación que se envía a los visitantes del parque. Contiene un mensaje, un tipo de notificación, la fecha y hora de generación, y una lista de destinatarios (visitantes) a los que se les ha enviado la notificación.
+ * Clase que representa una notificación que se envía a los visitantes del parque.
  */
 public class Notificacion {
     private String id;
@@ -15,7 +15,7 @@ public class Notificacion {
     private final List<Visitante> destinatarios = new ArrayList<>();
 
     /**
-     * Constructor de la clase Notificacion. Recibe un id, un mensaje y un tipo de notificación, y establece la fecha y hora de generación como el momento actual.
+     * Constructor de la clase Notificacion.
      * @param id
      * @param mensaje
      * @param tipo

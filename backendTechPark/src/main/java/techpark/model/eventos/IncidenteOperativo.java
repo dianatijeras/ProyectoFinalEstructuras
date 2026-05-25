@@ -3,7 +3,8 @@ package techpark.model.eventos;
 import java.time.LocalDateTime;
 
 /**
- * Representa un incidente operativo que ocurre en una atracción del parque, como una falla técnica, un accidente o cualquier situación que requiera atención inmediata. Contiene información sobre la atracción afectada, la descripción del incidente, su gravedad, la fecha y hora de ocurrencia, y el estado de resolución. Permite marcar el incidente como resuelto y registrar la solución aplicada.
+ * Representa un incidente operativo que ocurre en una atracción del parque, como una falla técnica, un accidente o cualquier situación que requiera atención inmediata.
+ * Permite marcar el incidente como resuelto y registrar la solución aplicada.
  */
 public class IncidenteOperativo {
     private String id;
@@ -15,7 +16,8 @@ public class IncidenteOperativo {
     private String solucion;
 
     /**
-     * Constructor de la clase IncidenteOperativo. Crea un nuevo incidente operativo con el id, atracción, descripción y gravedad especificados, y establece la fecha y hora actual como la fecha del incidente. El incidente se establece como no resuelto por defecto.
+     * Constructor de la clase IncidenteOperativo.
+     * El incidente se establece como no resuelto por defecto.
      * @param id
      * @param atraccion
      * @param descripcion
@@ -26,7 +28,7 @@ public class IncidenteOperativo {
     }
 
     /**
-     * Constructor de la clase IncidenteOperativo. Crea un nuevo incidente operativo con el id, atracción, descripción, gravedad y fecha y hora especificados.
+     * Constructor de la clase IncidenteOperativo.
      * @param id
      * @param atraccion
      * @param descripcion

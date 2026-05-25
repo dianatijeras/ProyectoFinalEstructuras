@@ -1,9 +1,11 @@
 package techpark.model.eventos;
 
+import techpark.model.usuarios.Operador;
+
 import java.time.LocalDateTime;
 
 /**
- * Representa una revisión técnica realizada a una atracción por un operador. Contiene información sobre la atracción revisada, el operador que realizó la revisión, la fecha y hora de la revisión, una descripción de la revisión y el resultado de la misma (aprobada o rechazada).
+ * Representa una revisión técnica realizada a una atracción por un operador.
  */
 public class RevisionTecnica {
     private String id;
@@ -14,7 +16,7 @@ public class RevisionTecnica {
     private ResultadoRevision resultado;
 
     /**
-     * Constructor de la clase RevisionTecnica. Recibe un id, una atracción, un operador, una descripción y un resultado, y establece la fecha y hora de la revisión como el momento actual.
+     * Constructor de la clase RevisionTecnica.
      * @param id
      * @param atraccion
      * @param operador

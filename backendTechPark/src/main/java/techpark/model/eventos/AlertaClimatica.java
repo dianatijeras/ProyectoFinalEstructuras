@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase que representa una alerta climática en el parque de diversiones. Contiene información sobre el tipo de clima, la fecha y hora de la alerta, si está activa o no, y las atracciones afectadas por la alerta.
+ * Clase que representa una alerta climática en el parque de diversiones.
  */
 public class AlertaClimatica {
     private String id;
@@ -15,7 +15,8 @@ public class AlertaClimatica {
     private final List<Atraccion> atraccionesAfectadas = new ArrayList<>();
 
     /**
-     * Constructor de la clase AlertaClimatica. Crea una nueva alerta climática con el id y tipo especificados, y establece la fecha y hora actual como la fecha de la alerta. La alerta se establece como activa por defecto.
+     * Constructor de la clase AlertaClimatica.
+     * La alerta se establece como activa por defecto.
      * @param id
      * @param tipo
      */
@@ -24,7 +25,7 @@ public class AlertaClimatica {
     }
 
     /**
-     * Constructor de la clase AlertaClimatica. Crea una nueva alerta climática con el id, tipo, fecha y hora, y estado de actividad especificados.
+     * Constructor de la clase AlertaClimatica.
      * @param id
      * @param tipo
      * @param fechaHora
