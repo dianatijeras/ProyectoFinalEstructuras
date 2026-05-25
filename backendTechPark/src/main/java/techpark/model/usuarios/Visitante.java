@@ -1,8 +1,13 @@
 package techpark.model.usuarios;
 
+import techpark.enums.Rol;
 import techpark.estructuras.conjunto.SetArbol;
+import techpark.estructuras.grafo.NodoGrafo;
+import techpark.estructuras.lista.ListaEnlazada;
 import techpark.model.eventos.Notificacion;
+import techpark.model.eventos.RegistroVisita;
 import techpark.model.parque.Atraccion;
+import techpark.model.tickets.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;

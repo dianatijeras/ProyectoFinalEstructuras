@@ -3,6 +3,7 @@ package techpark.estructuras.grafo;
 import techpark.estructuras.arbol.ArbolBST;
 import techpark.estructuras.cola.ColaPrioridad;
 import techpark.estructuras.conjunto.SetArbol;
+import techpark.estructuras.lista.ListaEnlazada;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

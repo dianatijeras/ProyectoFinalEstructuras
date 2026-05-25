@@ -1,5 +1,8 @@
 package techpark.model.usuarios;
 
+import techpark.enums.Rol;
+import techpark.model.parque.Parque;
+
 /**
  * Clase que representa a un administrador del parque. Un administrador tiene un parque asignado que gestiona.
  */
