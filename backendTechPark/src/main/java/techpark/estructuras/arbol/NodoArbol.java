@@ -1,4 +1,4 @@
-package techpark.estructuras;
+package techpark.estructuras.arbol;
 
 /**
  * Nodo de un árbol binario de búsqueda, con clave de tipo String y dato genérico.

@@ -1,4 +1,4 @@
-package techpark.estructuras;
+package techpark.estructuras.arbol;
 
 import java.util.ArrayList;
 import java.util.List;
