@@ -210,7 +210,7 @@ public class CargadorArchivo {
         }
         boolean activoEnParque = p.length >= 11 && Boolean.parseBoolean(p[10].trim());
         int cantidadFamilia = p.length >= 12 && !estaVacio(p[11]) ? entero(p[11]) : 1;
-        crearTicketParaVisitante("TIC-" + visitante.getDocumento(), visitante, tipoTicket, null, EstadoTicketEnum.ACTIVO, zona, activoEnParque, cantidadFamilia);
+        crearTicketParaVisitante("TIC-" + visitante.getDocumento(), visitante, tipoTicket, null, EstadoTicket.ACTIVO, zona, activoEnParque, cantidadFamilia);
     }
 
     /**
@@ -247,7 +247,7 @@ public class CargadorArchivo {
         String clave = visitante.getDocumento() + "|" + atraccion.getId() + "|" + fecha;
         if (visitasRegistradas.contains(clave)) return;
 
-        TipoTicket tipoTicket = visitante.getTicketActivo() != null ? visitante.getTicketActivo().getTipo() : TipoTicketEnum.GENERAL;
+        TipoTicket tipoTicket = visitante.getTicketActivo() != null ? visitante.getTicketActivo().getTipo() : TipoTicket.GENERAL;
         if (p.length >= 5 && !estaVacio(p[4])) tipoTicket = TipoTicket.valueOf(p[4].trim().toUpperCase());
         double costo = p.length >= 6 && !estaVacio(p[5]) ? decimal(p[5]) : 0;
 
@@ -291,7 +291,7 @@ public class CargadorArchivo {
         atraccion.actualizarTiempoEspera();
         visitante.setEnCola(true);
         colasRegistradas.add(clave);
-        notificarVisitante(visitante, "Te uniste a la cola de " + atraccion.getNombre() + " desde CSV", TipoNotifEnum.COLA);
+        notificarVisitante(visitante, "Te uniste a la cola de " + atraccion.getNombre() + " desde CSV", TipoNotif.COLA);
     }
 
     /**
@@ -407,7 +407,7 @@ public class CargadorArchivo {
             notificarTodos("Alerta climatica activa desde CSV: " + tipo, TipoNotif.CLIMA);
         }
         alertasClima.add(alerta);
-        parque.registrarNotificacionGlobal(new Notificacion(GeneradorId.generarId("NOT-"), "Alerta climatica cargada: " + tipo + " activa=" + activa, TipoNotifEnum.CLIMA));
+        parque.registrarNotificacionGlobal(new Notificacion(GeneradorId.generarId("NOT-"), "Alerta climatica cargada: " + tipo + " activa=" + activa, TipoNotif.CLIMA));
     }
 
     /**
@@ -742,4 +742,5 @@ public class CargadorArchivo {
         return resultado;
     }
 }
+
 
