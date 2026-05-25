@@ -1,5 +1,7 @@
 package techpark.estructuras.grafo;
 
+import techpark.estructuras.lista.ListaEnlazada;
+
 /**
  * Clase que representa un nodo en un grafo. Cada nodo tiene un identificador único, un dato genérico y una lista de aristas que representan sus vecinos.
  * @param <T>

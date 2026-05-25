@@ -2,7 +2,10 @@ package techpark;
 
 import org.junit.jupiter.api.Test;
 import techpark.datos.DatosIniciales;
+import techpark.enums.EstadoAtraccion;
 import techpark.enums.TipoTicket;
+import techpark.estructuras.grafo.NodoGrafo;
+import techpark.model.eventos.IncidenteOperativo;
 import techpark.model.parque.Atraccion;
 import techpark.model.parque.Parque;
 import techpark.model.reportes.ResultadoAcceso;
@@ -12,7 +15,10 @@ import techpark.model.usuarios.Visitante;
 import techpark.servicios.acceso.ServicioAcceso;
 import techpark.servicios.alertas.ServicioAlertas;
 import techpark.servicios.colas.ServicioColas;
+import techpark.servicios.parque.ServicioAdministracion;
 import techpark.servicios.parque.ServicioParque;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -78,11 +84,6 @@ public class TechParkSistemaTest {
         assertTrue(ticket.estaActivo());
     }
 
-    private DatosIniciales cargarDatos() {
-        DatosIniciales datos = new DatosIniciales();
-        datos.cargar();
-        return datos;
-    }
 
     @Test
     void colaVirtualDebeProcesarPrimeroVisitanteFastPass() {
@@ -125,5 +126,66 @@ public class TechParkSistemaTest {
         assertTrue(resultado.fueAutorizado());
         assertEquals(1, visitante.getHistorialVisitas().getTamanio());
         assertEquals(atraccion, visitante.getHistorialVisitas().obtener(0).getAtraccion());
+    }
+
+    @Test
+    void registrarAccesoDebeActualizarUbicacionActualDelVisitante() {
+        DatosIniciales datos = cargarDatos();
+        Parque parque = datos.getParque();
+        ServicioParque servicioParque = new ServicioParque(parque, new ServicioAlertas());
+        ServicioAcceso servicioAcceso = new ServicioAcceso();
+
+        Visitante visitante = datos.getVisitantes().get(0);
+        Atraccion atraccion = parque.buscarAtraccion("ATR-001");
+
+        servicioParque.venderTicket(visitante, TipoTicket.FAST_PASS, parque.getZonas().get(0));
+
+        ResultadoAcceso resultado = servicioAcceso.validarYRegistrarAcceso(visitante, atraccion);
+
+        assertTrue(resultado.fueAutorizado());
+        assertEquals(atraccion, visitante.getUltimaAtraccionVisitada());
+        assertEquals("yippe", visitante.getNombreUbicacionActual());
+    }
+
+    @Test
+    void registrarIncidenteDebeCerrarAtraccionAfectada() {
+        DatosIniciales datos = cargarDatos();
+        Parque parque = datos.getParque();
+        ServicioParque servicioParque = new ServicioParque(parque, new ServicioAlertas());
+        ServicioAdministracion servicioAdministracion = new ServicioAdministracion(
+                parque,
+                datos.getVisitantes(),
+                datos.getOperadores(),
+                servicioParque
+        );
+        Atraccion atraccion = parque.buscarAtraccion("ATR-001");
+
+        IncidenteOperativo incidente = servicioAdministracion.registrarIncidente(
+                atraccion,
+                "Falla temporal en sensor de seguridad",
+                "MEDIA"
+        );
+
+        assertNotNull(incidente);
+        assertEquals(EstadoAtraccion.CERRADA, atraccion.getEstado());
+        assertEquals("Cerrada por incidente operativo", atraccion.getMotivoCierre());
+        assertTrue(parque.getIncidentesOperativos().contains(incidente));
+    }
+
+    @Test
+    void grafoDebeCalcularRutaEntreAtraccionesConDijkstra() {
+        DatosIniciales datos = cargarDatos();
+
+        List<NodoGrafo<Atraccion>> ruta = datos.getParque().getMapa().dijkstra("ATR-001", "ATR-006");
+
+        assertFalse(ruta.isEmpty());
+        assertEquals("ATR-001", ruta.get(0).getId());
+        assertEquals("ATR-006", ruta.get(ruta.size() - 1).getId());
+    }
+
+    private DatosIniciales cargarDatos() {
+        DatosIniciales datos = new DatosIniciales();
+        datos.cargar();
+        return datos;
     }
 }

@@ -8,6 +8,7 @@ import techpark.enums.TipoClima;
 import techpark.enums.TipoTicket;
 import techpark.estructuras.grafo.NodoGrafo;
 import techpark.model.parque.Atraccion;
+import techpark.model.parque.Parque;
 import techpark.model.reportes.ResultadoAcceso;
 import techpark.model.usuarios.Operador;
 import techpark.model.usuarios.Visitante;

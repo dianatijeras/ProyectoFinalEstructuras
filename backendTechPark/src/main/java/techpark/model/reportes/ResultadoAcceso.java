@@ -1,5 +1,7 @@
 package techpark.model.reportes;
 
+import techpark.enums.Resultado;
+
 /**
  * Clase que representa el resultado de un intento de acceso a una zona del parque.
  */

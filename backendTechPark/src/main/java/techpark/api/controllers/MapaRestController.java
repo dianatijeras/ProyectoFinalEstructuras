@@ -1,9 +1,10 @@
 package techpark.api.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import techpark.api.dto.ApiResponse;
+import techpark.api.dto.MapaResponse;
+import techpark.api.dto.RutaResponse;
+import techpark.config.AppState;
 import techpark.estructuras.grafo.Arista;
 import techpark.estructuras.grafo.NodoGrafo;
 import techpark.model.parque.Atraccion;
