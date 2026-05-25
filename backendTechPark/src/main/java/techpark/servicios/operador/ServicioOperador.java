@@ -118,7 +118,7 @@ public class ServicioOperador {
         RevisionTecnica revision = new RevisionTecnica(GeneradorId.generarId("REV-"), atraccion, operador, descripcion, resultado);
         servicioAlertas.procesarRevisionTecnica(atraccion, resultado);
         if (parque != null) {
-            Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "Revision tecnica " + resultado + " registrada para " + atraccion.getNombre(), TipoNotifEnum.MANTENIMIENTO);
+            Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "Revision tecnica " + resultado + " registrada para " + atraccion.getNombre(), TipoNotif.MANTENIMIENTO);
             parque.registrarNotificacionGlobal(notificacion);
             for (Visitante visitante : parque.getVisitantesConTicketActivo()) notificacion.agregarDestinatario(visitante);
         }

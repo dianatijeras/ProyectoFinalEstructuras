@@ -1,5 +1,8 @@
 package techpark.model.tickets;
 
+import techpark.enums.EstadoTicket;
+import techpark.enums.TipoTicket;
+import techpark.model.parque.Zona;
 import techpark.model.usuarios.Visitante;
 
 import java.time.LocalDateTime;
@@ -39,7 +42,7 @@ public class Ticket {
      * @return
      */
     public int getPrioridad(){
-        return tipo == TipoTicketEnum.FAST_PASS ? 1 : 2;
+        return tipo == TipoTicket.FAST_PASS ? 1 : 2;
     }
 
     /**

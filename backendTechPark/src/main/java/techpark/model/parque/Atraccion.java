@@ -2,6 +2,8 @@ package techpark.model.parque;
 
 import techpark.enums.EstadoAtraccion;
 import techpark.enums.TipoAtraccion;
+import techpark.estructuras.cola.ColaPrioridad;
+import techpark.estructuras.lista.ListaEnlazada;
 import techpark.model.tickets.EntradaEnCola;
 import techpark.model.usuarios.Operador;
 

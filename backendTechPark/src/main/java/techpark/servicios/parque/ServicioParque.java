@@ -3,6 +3,7 @@ package techpark.servicios.parque;
 import techpark.enums.TipoClima;
 import techpark.enums.TipoNotif;
 import techpark.enums.TipoTicket;
+import techpark.model.eventos.Notificacion;
 import techpark.model.parque.Parque;
 import techpark.model.parque.Zona;
 import techpark.model.tickets.Ticket;

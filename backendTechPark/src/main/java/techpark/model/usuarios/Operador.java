@@ -1,5 +1,8 @@
 package techpark.model.usuarios;
 
+import techpark.enums.Rol;
+import techpark.model.parque.Zona;
+
 /**
  * Clase que representa a un operador del parque. Un operador tiene una zona asignada que supervisa.
  */

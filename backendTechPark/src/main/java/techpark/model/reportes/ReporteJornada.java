@@ -1,6 +1,8 @@
 package techpark.model.reportes;
 
 import techpark.model.eventos.AlertaMantenimiento;
+import techpark.model.eventos.IncidenteOperativo;
+import techpark.model.parque.Atraccion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,17 +21,6 @@ public class ReporteJornada {
     private final List<Atraccion> atraccionesConMasIncidentes = new ArrayList<>();
     private final List<IncidenteOperativo> incidentesOperativos = new ArrayList<>();
 
-    /**
-     * Constructor para crear un nuevo reporte de jornada.
-     * @param fecha
-     * @param ingresosDiarios
-     * @param cierresPorClima
-     */
-    public ReporteJornada(LocalDate fecha, double ingresosDiarios, int cierresPorClima) {
-        this.fecha = fecha;
-        this.ingresosDiarios = ingresosDiarios;
-        this.cierresPorClima = cierresPorClima;
-    }
 
     /**
      * Metodo que devuelve la fecha del reporte

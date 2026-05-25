@@ -1,5 +1,8 @@
 package techpark.model.parque;
 
+import techpark.estructuras.lista.ListaEnlazada;
+import techpark.model.usuarios.Operador;
+
 import java.util.ArrayList;
 import java.util.List;
 
