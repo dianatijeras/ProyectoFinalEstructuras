@@ -9,7 +9,7 @@ public class Validador {
     }
 
     /**
-     * Valida que un texto no sea nulo ni esté vacío. 
+     * Valida que un texto no sea nulo ni esté vacío.
      * @param texto
      * @param campo
      */
