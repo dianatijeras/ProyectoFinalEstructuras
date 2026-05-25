@@ -1,6 +1,7 @@
 package techpark.api.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import techpark.api.dto.ActualizarAtraccionRequest;
 import techpark.enums.EstadoAtraccion;
 import techpark.enums.TipoAtraccion;
 import techpark.model.parque.Atraccion;
