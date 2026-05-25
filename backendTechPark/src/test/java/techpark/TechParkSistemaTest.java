@@ -3,10 +3,15 @@ package techpark;
 import org.junit.jupiter.api.Test;
 import techpark.datos.DatosIniciales;
 import techpark.enums.TipoTicket;
+import techpark.model.parque.Atraccion;
 import techpark.model.parque.Parque;
+import techpark.model.reportes.ResultadoAcceso;
+import techpark.model.tickets.EntradaEnCola;
 import techpark.model.tickets.Ticket;
 import techpark.model.usuarios.Visitante;
+import techpark.servicios.acceso.ServicioAcceso;
 import techpark.servicios.alertas.ServicioAlertas;
+import techpark.servicios.colas.ServicioColas;
 import techpark.servicios.parque.ServicioParque;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -77,5 +82,48 @@ public class TechParkSistemaTest {
         DatosIniciales datos = new DatosIniciales();
         datos.cargar();
         return datos;
+    }
+
+    @Test
+    void colaVirtualDebeProcesarPrimeroVisitanteFastPass() {
+        DatosIniciales datos = cargarDatos();
+        Parque parque = datos.getParque();
+        ServicioParque servicioParque = new ServicioParque(parque, new ServicioAlertas());
+        ServicioColas servicioColas = new ServicioColas(parque);
+
+        Visitante general = datos.getVisitantes().get(0);
+        Visitante fastPass = datos.getVisitantes().get(3);
+        Atraccion atraccion = parque.buscarAtraccion("ATR-001");
+
+        servicioParque.venderTicket(general, TipoTicket.GENERAL, parque.getZonas().get(0));
+        servicioParque.venderTicket(fastPass, TipoTicket.FAST_PASS, parque.getZonas().get(0));
+
+        servicioColas.unirseACola(general, atraccion);
+        servicioColas.unirseACola(fastPass, atraccion);
+
+        EntradaEnCola siguiente = servicioColas.llamarSiguiente(atraccion);
+
+        assertNotNull(siguiente);
+        assertEquals(fastPass, siguiente.getVisitante());
+        assertEquals(TipoTicket.FAST_PASS, siguiente.getTicket().getTipo());
+    }
+
+    @Test
+    void registrarAccesoDebeActualizarHistorialDelVisitante() {
+        DatosIniciales datos = cargarDatos();
+        Parque parque = datos.getParque();
+        ServicioParque servicioParque = new ServicioParque(parque, new ServicioAlertas());
+        ServicioAcceso servicioAcceso = new ServicioAcceso();
+
+        Visitante visitante = datos.getVisitantes().get(0);
+        Atraccion atraccion = parque.buscarAtraccion("ATR-001");
+
+        servicioParque.venderTicket(visitante, TipoTicket.FAST_PASS, parque.getZonas().get(0));
+
+        ResultadoAcceso resultado = servicioAcceso.validarYRegistrarAcceso(visitante, atraccion);
+
+        assertTrue(resultado.fueAutorizado());
+        assertEquals(1, visitante.getHistorialVisitas().getTamanio());
+        assertEquals(atraccion, visitante.getHistorialVisitas().obtener(0).getAtraccion());
     }
 }
