@@ -1,10 +1,16 @@
 package techpark;
 
 import org.junit.jupiter.api.Test;
+import techpark.datos.DatosIniciales;
+import techpark.enums.TipoTicket;
+import techpark.model.parque.Parque;
+import techpark.model.tickets.Ticket;
 import techpark.model.usuarios.Visitante;
+import techpark.servicios.alertas.ServicioAlertas;
+import techpark.servicios.parque.ServicioParque;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TechParkSistemaTest {
 
@@ -35,5 +41,41 @@ public class TechParkSistemaTest {
 
         assertThrows(IllegalArgumentException.class,
                 () -> visitante.actualizarPerfil("Carlos Ruiz", 22, -1.50, 40000));
+    }
+
+    @Test
+    void debeComprarTicketGeneralCorrectamente() {
+        DatosIniciales datos = cargarDatos();
+        Parque parque = datos.getParque();
+        ServicioParque servicioParque = new ServicioParque(parque, new ServicioAlertas());
+        Visitante visitante = datos.getVisitantes().get(0);
+
+        Ticket ticket = servicioParque.venderTicket(visitante, TipoTicket.GENERAL, parque.getZonas().get(0));
+
+        assertNotNull(ticket);
+        assertTrue(ticket.estaActivo());
+        assertEquals(TipoTicket.GENERAL, ticket.getTipo());
+        assertEquals(ticket, visitante.getTicketActivo());
+        assertEquals(parque.getZonas().get(0), ticket.getZonaIngreso());
+    }
+
+    @Test
+    void debeComprarTicketFastPassYConservarTipoYPrioridad() {
+        DatosIniciales datos = cargarDatos();
+        Parque parque = datos.getParque();
+        ServicioParque servicioParque = new ServicioParque(parque, new ServicioAlertas());
+        Visitante visitante = datos.getVisitantes().get(3);
+
+        Ticket ticket = servicioParque.venderTicket(visitante, TipoTicket.FAST_PASS, parque.getZonas().get(0));
+
+        assertEquals(TipoTicket.FAST_PASS, ticket.getTipo());
+        assertEquals(1, ticket.getPrioridad());
+        assertTrue(ticket.estaActivo());
+    }
+
+    private DatosIniciales cargarDatos() {
+        DatosIniciales datos = new DatosIniciales();
+        datos.cargar();
+        return datos;
     }
 }
