@@ -2,6 +2,12 @@ package techpark.api.controllers;
 
 
 import org.springframework.web.bind.annotation.*;
+import techpark.api.dto.ApiResponse;
+import techpark.api.dto.AtraccionDTO;
+import techpark.api.dto.EstadoAtraccionRequest;
+import techpark.api.dto.RevisionTecnicaRequest;
+import techpark.api.mappers.ApiMapper;
+import techpark.config.AppState;
 import techpark.enums.EstadoAtraccion;
 import techpark.enums.ResultadoRevision;
 import techpark.model.eventos.RevisionTecnica;

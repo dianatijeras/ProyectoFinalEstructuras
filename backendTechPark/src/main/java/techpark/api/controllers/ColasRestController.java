@@ -1,6 +1,10 @@
 package techpark.api.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import techpark.api.dto.ApiResponse;
+import techpark.api.dto.ColaRequest;
+import techpark.api.dto.ColaResponse;
+import techpark.config.AppState;
 import techpark.model.parque.Atraccion;
 import techpark.model.reportes.ResultadoAcceso;
 import techpark.model.tickets.EntradaEnCola;

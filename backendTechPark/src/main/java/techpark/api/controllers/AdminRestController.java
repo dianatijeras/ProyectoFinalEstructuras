@@ -1,7 +1,9 @@
 package techpark.api.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import techpark.api.dto.ActualizarAtraccionRequest;
+import techpark.api.dto.*;
+import techpark.api.mappers.ApiMapper;
+import techpark.config.AppState;
 import techpark.enums.EstadoAtraccion;
 import techpark.enums.TipoAtraccion;
 import techpark.model.parque.Atraccion;
@@ -126,8 +128,8 @@ public class AdminRestController {
     @PostMapping("/atracciones")
     public ApiResponse<AtraccionDTO> crearAtraccion(@RequestBody CrearAtraccionRequest request) {
         Zona zona = buscarZona(request.zonaId());
-        TipoAtraccionEnum tipo = TipoAtraccionEnum.valueOf(request.tipo().toUpperCase());
-        EstadoAtraccionEnum estado = request.estadoInicial() == null || request.estadoInicial().isBlank() ? EstadoAtraccionEnum.ACTIVA : EstadoAtraccionEnum.valueOf(request.estadoInicial().toUpperCase());
+        TipoAtraccion tipo = TipoAtraccion.valueOf(request.tipo().toUpperCase());
+        EstadoAtraccion estado = request.estadoInicial() == null || request.estadoInicial().isBlank() ? EstadoAtraccion.ACTIVA : EstadoAtraccion.valueOf(request.estadoInicial().toUpperCase());
         Atraccion atraccion = appState.getServicioAdministracion().crearAtraccion(request.id(), request.nombre(), tipo, zona, request.capacidadMaximaPorCiclo(), request.alturaMinima(), request.edadMinima(), request.costoAdicional(), estado, request.tiempoEstimadoEspera() == null ? 0 : request.tiempoEstimadoEspera());
         agregarAristas(request.aristas(), atraccion.getId());
         return ApiResponse.ok("Atraccion creada", ApiMapper.toAtraccionDTO(atraccion));

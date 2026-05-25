@@ -1,6 +1,9 @@
 package techpark.api.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import techpark.api.dto.AlertaClimaticaRequest;
+import techpark.api.dto.ApiResponse;
+import techpark.config.AppState;
 import techpark.enums.EstadoAtraccion;
 import techpark.enums.TipoClima;
 import techpark.model.eventos.AlertaClimatica;
