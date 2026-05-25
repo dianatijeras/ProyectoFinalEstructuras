@@ -1,5 +1,8 @@
 package techpark.model.eventos;
 
+import techpark.enums.TipoClima;
+import techpark.model.parque.Atraccion;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

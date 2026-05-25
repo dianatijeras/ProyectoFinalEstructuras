@@ -1,5 +1,7 @@
 package techpark.model.eventos;
 
+import techpark.enums.ResultadoRevision;
+import techpark.model.parque.Atraccion;
 import techpark.model.usuarios.Operador;
 
 import java.time.LocalDateTime;

@@ -1,5 +1,7 @@
 package techpark.model.parque;
 
+import techpark.enums.EstadoAtraccion;
+import techpark.enums.TipoAtraccion;
 import techpark.model.tickets.EntradaEnCola;
 import techpark.model.usuarios.Operador;
 

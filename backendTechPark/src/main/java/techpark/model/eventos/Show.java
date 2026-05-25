@@ -1,5 +1,8 @@
 package techpark.model.eventos;
 
+import techpark.enums.EstadoShow;
+import techpark.model.parque.Zona;
+
 import java.time.LocalDateTime;
 
 /**

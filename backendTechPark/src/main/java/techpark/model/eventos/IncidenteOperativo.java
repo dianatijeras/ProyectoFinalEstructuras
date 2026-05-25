@@ -1,5 +1,7 @@
 package techpark.model.eventos;
 
+import techpark.model.parque.Atraccion;
+
 import java.time.LocalDateTime;
 
 /**

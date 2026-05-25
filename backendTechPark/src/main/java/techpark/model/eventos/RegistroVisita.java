@@ -1,5 +1,7 @@
 package techpark.model.eventos;
 
+import techpark.enums.TipoTicket;
+
 import java.time.LocalDateTime;
 
 /**

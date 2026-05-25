@@ -1,5 +1,8 @@
 package techpark.model.eventos;
 
+import techpark.enums.TipoNotif;
+import techpark.model.usuarios.Visitante;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
