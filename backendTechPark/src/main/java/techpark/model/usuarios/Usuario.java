@@ -100,6 +100,8 @@ public abstract class Usuario {
     }
 
     /**
+
+    /**
      * Metodo que devuelve una representación en cadena del usuario, mostrando su nombre y rol.
      * @return
      */
