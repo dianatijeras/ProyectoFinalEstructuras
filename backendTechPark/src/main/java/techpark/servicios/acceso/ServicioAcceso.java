@@ -1,5 +1,8 @@
 package techpark.servicios.acceso;
 
+import techpark.enums.EstadoAtraccion;
+import techpark.enums.TipoTicket;
+import techpark.model.eventos.RegistroVisita;
 import techpark.model.parque.Atraccion;
 import techpark.model.reportes.ResultadoAcceso;
 import techpark.model.tickets.Ticket;
@@ -21,7 +24,7 @@ public class ServicioAcceso {
         if (visitante == null || atraccion == null) return ResultadoAcceso.denegado("Datos incompletos");
         Ticket ticket = visitante.getTicketActivo();
         if (ticket == null || !ticket.estaActivo()) return ResultadoAcceso.denegado("Ticket no activo");
-        if (atraccion.getEstado() != EstadoAtraccionEnum.ACTIVA) return ResultadoAcceso.denegado("La atraccion no esta activa");
+        if (atraccion.getEstado() != EstadoAtraccion.ACTIVA) return ResultadoAcceso.denegado("La atraccion no esta activa");
         if (atraccion.getZona() != null && !atraccion.getZona().hayAforoDisponible()) return ResultadoAcceso.denegado("La zona no tiene aforo disponible");
         if (!atraccion.tieneOperadorResponsable()) return ResultadoAcceso.denegado("La atraccion no tiene operador responsable");
         if (!atraccion.hayCapacidadEnCiclo()) return ResultadoAcceso.denegado("La atraccion alcanzo la capacidad maxima del ciclo");
@@ -29,7 +32,7 @@ public class ServicioAcceso {
         if (visitante.getEstatura() < atraccion.getAlturaMinima()) return ResultadoAcceso.denegado("No cumple la altura minima");
 
         double costo = 0;
-        if (atraccion.getCostoAdicional() > 0 && ticket.getTipo() == TipoTicketEnum.GENERAL) {
+        if (atraccion.getCostoAdicional() > 0 && ticket.getTipo() == TipoTicket.GENERAL) {
             if (!visitante.descontarSaldo(atraccion.getCostoAdicional())) return ResultadoAcceso.denegado("Saldo virtual insuficiente");
             costo = atraccion.getCostoAdicional();
         }

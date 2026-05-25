@@ -1,6 +1,7 @@
 package techpark.servicios.alertas;
 
 import techpark.enums.*;
+import techpark.estructuras.cola.ColaPrioridad;
 import techpark.estructuras.conjunto.SetArbol;
 import techpark.model.eventos.AlertaClimatica;
 import techpark.model.eventos.AlertaMantenimiento;
@@ -55,7 +56,7 @@ public class ServicioAlertas {
      * @param alerta
      */
     private void notificarMantenimiento(Parque parque, Atraccion atraccion, AlertaMantenimiento alerta) {
-        Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "La atraccion " + atraccion.getNombre() + " alcanzo el limite de visitantes y entro en mantenimiento preventivo", TipoNotifEnum.MANTENIMIENTO);
+        Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "La atraccion " + atraccion.getNombre() + " alcanzo el limite de visitantes y entro en mantenimiento preventivo", TipoNotif.MANTENIMIENTO);
         parque.registrarNotificacionGlobal(notificacion);
         for (Visitante visitante : parque.getVisitantesConTicketActivo()) {
             notificacion.agregarDestinatario(visitante);
@@ -108,7 +109,7 @@ public class ServicioAlertas {
             }
         }
 
-        Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "La alerta climatica " + alerta.getTipo() + " fue finalizada", TipoNotifEnum.CLIMA);
+        Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "La alerta climatica " + alerta.getTipo() + " fue finalizada", TipoNotif.CLIMA);
         parque.registrarNotificacionGlobal(notificacion);
         for (Visitante visitante : parque.getVisitantesConTicketActivo()) notificacion.agregarDestinatario(visitante);
         return alerta;

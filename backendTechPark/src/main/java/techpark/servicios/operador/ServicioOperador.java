@@ -1,6 +1,7 @@
 package techpark.servicios.operador;
 
 import techpark.enums.EstadoAtraccion;
+import techpark.enums.ResultadoRevision;
 import techpark.enums.TipoNotif;
 import techpark.model.eventos.Notificacion;
 import techpark.model.eventos.RevisionTecnica;
@@ -41,7 +42,7 @@ public class ServicioOperador {
      * @param servicioAlertas
      * @param parque
      */
-    public ServicioOperador(ServicioAcceso servicioAcceso, ServicioColas servicioColas, ServicioAlertas servicioAlertas, techpark.modelo.parque.Parque parque) {
+    public ServicioOperador(ServicioAcceso servicioAcceso, ServicioColas servicioColas, ServicioAlertas servicioAlertas, techpark.model.parque.Parque parque) {
         this(servicioAcceso, servicioColas, servicioAlertas);
         this.parque = parque;
     }
@@ -74,7 +75,7 @@ public class ServicioOperador {
         }
         servicioAlertas.evaluarMantenimiento(parque, atraccion);
         if (resultado.fueAutorizado() && parque != null) {
-            Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "Acceso autorizado a " + atraccion.getNombre() + " para " + entrada.getVisitante().getNombre(), TipoNotifEnum.ESTADO_ATRACCION);
+            Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "Acceso autorizado a " + atraccion.getNombre() + " para " + entrada.getVisitante().getNombre(), TipoNotif.ESTADO_ATRACCION);
             parque.registrarNotificacionGlobal(notificacion);
             notificacion.agregarDestinatario(entrada.getVisitante());
         }
@@ -112,7 +113,7 @@ public class ServicioOperador {
      * @param resultado
      * @return
      */
-    public RevisionTecnica registrarRevisionTecnica(Operador operador, Atraccion atraccion, String descripcion, ResultadoRevisionEnum resultado) {
+    public RevisionTecnica registrarRevisionTecnica(Operador operador, Atraccion atraccion, String descripcion, ResultadoRevision resultado) {
         validarZona(operador, atraccion);
         RevisionTecnica revision = new RevisionTecnica(GeneradorId.generarId("REV-"), atraccion, operador, descripcion, resultado);
         servicioAlertas.procesarRevisionTecnica(atraccion, resultado);

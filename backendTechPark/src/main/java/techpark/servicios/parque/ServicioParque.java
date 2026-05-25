@@ -1,6 +1,7 @@
 package techpark.servicios.parque;
 
 import techpark.enums.TipoClima;
+import techpark.enums.TipoNotif;
 import techpark.enums.TipoTicket;
 import techpark.model.parque.Parque;
 import techpark.model.parque.Zona;
@@ -126,7 +127,7 @@ public class ServicioParque {
                 ticket.expirar();
                 parque.disminuirAforo();
                 if (ticket.getZonaIngreso() != null) ticket.getZonaIngreso().disminuirAforo();
-                Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "Tu ticket ha expirado por cierre de jornada a las 6:00 p. m.", TipoNotifEnum.ESTADO_ATRACCION);
+                Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "Tu ticket ha expirado por cierre de jornada a las 6:00 p. m.", TipoNotif.ESTADO_ATRACCION);
                 notificacion.agregarDestinatario(visitante);
                 parque.registrarNotificacionGlobal(notificacion);
                 expirados++;

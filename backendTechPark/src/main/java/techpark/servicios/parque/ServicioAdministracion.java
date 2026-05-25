@@ -2,6 +2,7 @@ package techpark.servicios.parque;
 
 import techpark.enums.EstadoAtraccion;
 import techpark.enums.TipoAtraccion;
+import techpark.enums.TipoNotif;
 import techpark.model.eventos.IncidenteOperativo;
 import techpark.model.eventos.Notificacion;
 import techpark.model.parque.Atraccion;
@@ -174,7 +175,7 @@ public class ServicioAdministracion {
      * @param tiempoEstimadoEspera
      * @return
      */
-    public Atraccion crearAtraccion(String id, String nombre, TipoAtraccion tipo, Zona zona, int capacidad, double alturaMinima, int edadMinima, double costoAdicional, EstadoAtraccionEnum estado, int tiempoEstimadoEspera) {
+    public Atraccion crearAtraccion(String id, String nombre, TipoAtraccion tipo, Zona zona, int capacidad, double alturaMinima, int edadMinima, double costoAdicional, EstadoAtraccion estado, int tiempoEstimadoEspera) {
         if (id == null || id.isBlank()) throw new IllegalArgumentException("El id de la atraccion es obligatorio");
         if (nombre == null || nombre.isBlank()) throw new IllegalArgumentException("El nombre de la atraccion es obligatorio");
         if (parque.buscarAtraccion(id) != null) throw new IllegalArgumentException("Ya existe una atraccion con ese identificador");
@@ -182,7 +183,7 @@ public class ServicioAdministracion {
         Atraccion atraccion = new Atraccion(id, nombre, tipo, capacidad, alturaMinima, edadMinima, costoAdicional);
         zona.agregarAtraccion(atraccion);
         for (Operador operador : zona.getOperadoresAsignados()) atraccion.asignarOperadorResponsable(operador);
-        if (estado != null && estado != EstadoAtraccion.ACTIVA) atraccion.cambiarEstado(estado, estado == EstadoAtraccionEnum.CERRADA ? "Creada cerrada" : "Creada en mantenimiento");
+        if (estado != null && estado != EstadoAtraccion.ACTIVA) atraccion.cambiarEstado(estado, estado == EstadoAtraccion.CERRADA ? "Creada cerrada" : "Creada en mantenimiento");
         atraccion.setTiempoEstimadoEspera(tiempoEstimadoEspera);
         parque.registrarAtraccion(atraccion);
         return atraccion;
@@ -264,7 +265,7 @@ public class ServicioAdministracion {
         atraccion.registrarIncidente();
         atraccion.cambiarEstado(EstadoAtraccion.CERRADA, "Cerrada por incidente operativo");
         parque.registrarIncidente(incidente);
-        Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "Incidente " + incidente.getGravedad() + " registrado en " + atraccion.getNombre() + ": " + incidente.getDescripcion(), TipoNotifEnum.INCIDENTE);
+        Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "Incidente " + incidente.getGravedad() + " registrado en " + atraccion.getNombre() + ": " + incidente.getDescripcion(), TipoNotif.INCIDENTE);
         parque.registrarNotificacionGlobal(notificacion);
         notificarVisitantesActivosYEnCola(notificacion, atraccion);
         return incidente;
@@ -309,7 +310,7 @@ public class ServicioAdministracion {
         for (IncidenteOperativo incidente : parque.getIncidentesOperativos()) {
             if (incidente.getId().equalsIgnoreCase(idIncidente)) {
                 incidente.resolver(solucion);
-                Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "Incidente resuelto en " + incidente.getAtraccion().getNombre() + ": " + incidente.getSolucion(), TipoNotifEnum.INCIDENTE);
+                Notificacion notificacion = new Notificacion(GeneradorId.generarId("NOT-"), "Incidente resuelto en " + incidente.getAtraccion().getNombre() + ": " + incidente.getSolucion(), TipoNotif.INCIDENTE);
                 parque.registrarNotificacionGlobal(notificacion);
                 return incidente;
             }
